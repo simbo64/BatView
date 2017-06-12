@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F417E84D1EEDF29400753952 /* PairInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F417E84C1EEDF29400753952 /* PairInterfaceController.swift */; };
+		F44606AB1EEB40C700BCEE63 /* CBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44606AA1EEB40C700BCEE63 /* CBManager.swift */; };
 		F4FB9B9C1EE60C56005A0BFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB9B9B1EE60C56005A0BFD /* AppDelegate.swift */; };
 		F4FB9B9E1EE60C56005A0BFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB9B9D1EE60C56005A0BFD /* ViewController.swift */; };
 		F4FB9BA11EE60C56005A0BFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4FB9B9F1EE60C56005A0BFD /* Main.storyboard */; };
@@ -74,6 +76,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F417E84C1EEDF29400753952 /* PairInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairInterfaceController.swift; sourceTree = "<group>"; };
+		F44606AA1EEB40C700BCEE63 /* CBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBManager.swift; sourceTree = "<group>"; };
 		F4FB9B981EE60C56005A0BFD /* BatView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BatView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4FB9B9B1EE60C56005A0BFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4FB9B9D1EE60C56005A0BFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 			isa = PBXGroup;
 			children = (
 				F4FB9BC91EE60C56005A0BFD /* InterfaceController.swift */,
+				F417E84C1EEDF29400753952 /* PairInterfaceController.swift */,
+				F44606AA1EEB40C700BCEE63 /* CBManager.swift */,
 				F4FB9BCB1EE60C56005A0BFD /* ExtensionDelegate.swift */,
 				F4FB9BCD1EE60C56005A0BFD /* NotificationController.swift */,
 				F4FB9BCF1EE60C56005A0BFD /* ComplicationController.swift */,
@@ -371,9 +377,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4FB9BCE1EE60C56005A0BFD /* NotificationController.swift in Sources */,
+				F417E84D1EEDF29400753952 /* PairInterfaceController.swift in Sources */,
 				F4FB9BD01EE60C56005A0BFD /* ComplicationController.swift in Sources */,
 				F4FB9BCC1EE60C56005A0BFD /* ExtensionDelegate.swift in Sources */,
 				F4FB9BCA1EE60C56005A0BFD /* InterfaceController.swift in Sources */,
+				F44606AB1EEB40C700BCEE63 /* CBManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +683,7 @@
 				F4FB9BD91EE60C56005A0BFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4FB9BDB1EE60C56005A0BFD /* Build configuration list for PBXNativeTarget "BatView WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -683,6 +692,7 @@
 				F4FB9BDD1EE60C56005A0BFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4FB9BDF1EE60C56005A0BFD /* Build configuration list for PBXNativeTarget "BatView" */ = {
 			isa = XCConfigurationList;
@@ -691,6 +701,7 @@
 				F4FB9BE11EE60C56005A0BFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4FB9BE21EE60C56005A0BFD /* Build configuration list for PBXNativeTarget "BatViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -699,6 +710,7 @@
 				F4FB9BE41EE60C56005A0BFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,16 +1,97 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11055"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13034"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider="target"/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="BatView_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" radius="0.0" spacing="1" id="XeY-U0-9lk">
+                            <items>
+                                <group width="1" alignment="left" spacing="3" id="rSV-8v-8gk">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text="99%" id="Owe-C7-8J8">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <separator alignment="left" verticalAlignment="center" id="4ZP-rq-rwo">
+                                            <color key="color" red="0.98039215690000003" green="0.066666666669999999" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </separator>
+                                        <label alignment="left" verticalAlignment="center" text="This Watch" id="YsE-1h-nEX">
+                                            <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" layout="overlap" spacing="0.0" id="AjN-dC-bYR">
+                                    <items>
+                                        <group width="2" height="5" alignment="left" verticalAlignment="center" radius="2" id="kh4-ge-Hjz">
+                                            <color key="backgroundColor" red="0.98039215690000003" green="0.066666666669999999" blue="0.30980392159999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </group>
+                                        <group width="130" height="5" alignment="left" verticalAlignment="center" radius="2" id="bXE-Jf-SU0">
+                                            <color key="backgroundColor" red="0.47058823529999999" green="0.47843137250000001" blue="1" alpha="0.30016588184931509" colorSpace="calibratedRGB"/>
+                                        </group>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" title="Pair Device" id="2We-Ut-4vL">
+                            <connections>
+                                <segue destination="Oua-aA-aUx" kind="modal" id="WMG-DF-5WI"/>
+                            </connections>
+                        </button>
+                        <table alignment="left" id="AwD-mi-q8t">
+                            <items>
+                                <tableRow id="gjR-hk-aTk">
+                                    <group key="rootItem" width="1" alignment="left" id="GeU-8W-wFr"/>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="pairDeviceButton" destination="2We-Ut-4vL" id="VFS-nv-bua"/>
+                        <outlet property="watchBatteryOverlay" destination="kh4-ge-Hjz" id="zcm-Ju-eK2"/>
+                        <outlet property="watchBatteryPercentage" destination="Owe-C7-8J8" id="qw4-Ni-dXh"/>
+                        <outlet property="watchBatteryUnderlay" destination="bXE-Jf-SU0" id="hTj-EV-aew"/>
+                    </connections>
+                </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--Pair Interface Controller-->
+        <scene sceneID="sgV-3G-L9j">
+            <objects>
+                <controller id="Oua-aA-aUx" customClass="PairInterfaceController" customModule="BatView_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" alignment="left" layout="vertical" id="9lW-SM-wy7">
+                            <items>
+                                <table alignment="left" id="YEc-td-imt">
+                                    <items>
+                                        <tableRow id="vXv-rs-IQy">
+                                            <group key="rootItem" width="1" alignment="left" id="RX6-vz-Jsq"/>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                                <button width="1" alignment="left" verticalAlignment="bottom" title="Cancel" id="ZEs-3k-0Z9">
+                                    <connections>
+                                        <action selector="cancelButtonPressed" destination="Oua-aA-aUx" id="BaX-X3-C2b"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="cancelButton" destination="ZEs-3k-0Z9" id="ON0-fP-PlL"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="446" y="345"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -31,7 +112,7 @@
         <!--Notification Controller-->
         <scene sceneID="ZPc-GJ-vnh">
             <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModuleProvider="target"/>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="BatView_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="468" y="643"/>
         </scene>
