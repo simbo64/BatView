@@ -11,6 +11,7 @@ import WatchKit
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
+        readDeviceData()
         // Perform any final initialization of your application.
     }
 
@@ -44,6 +45,20 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
                 // make sure to complete unhandled task types
                 task.setTaskCompletedWithSnapshot(false)
             }
+        }
+    }
+    
+    func readDeviceData() {
+        print(WKInterfaceDevice.current().name)
+        print(WKInterfaceDevice.current().model,WKInterfaceDevice.current().systemName,WKInterfaceDevice.current().systemVersion)
+        WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
+        print(WKInterfaceDevice.current().batteryState.rawValue,WKInterfaceDevice.current().batteryLevel)
+        print(WKInterfaceDevice.current().waterResistanceRating.rawValue)
+        if WKInterfaceDevice.current().waterResistanceRating.rawValue == 1 {
+            print("Apple Watch Series 2")
+        }
+        else {
+            print("Apple Watch Series 1/0")
         }
     }
 

@@ -19,7 +19,7 @@ class InterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         defineUIElements()
-        readDeviceData()
+        
         
        // CoreBluetoothManager().initializeCB(runningInBackground: false)
         
@@ -47,19 +47,7 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
-    func readDeviceData() {
-        print(WKInterfaceDevice.current().name)
-        print(WKInterfaceDevice.current().model,WKInterfaceDevice.current().systemName,WKInterfaceDevice.current().systemVersion)
-        WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
-        print(WKInterfaceDevice.current().batteryState.rawValue,WKInterfaceDevice.current().batteryLevel)
-        print(WKInterfaceDevice.current().waterResistanceRating.rawValue)
-        if WKInterfaceDevice.current().waterResistanceRating.rawValue == 1 {
-            print("Apple Watch Series 2")
-        }
-        else {
-            print("Apple Watch Series 1/0")
-        }
-    }
+    
     
     func defineUIElements() {
         self.watchBatteryUnderlay.setWidth(WKInterfaceDevice.current().screenBounds.width)
