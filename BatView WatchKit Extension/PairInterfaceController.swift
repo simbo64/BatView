@@ -48,6 +48,7 @@ class PairInterfaceController: WKInterfaceController {
     
     @IBAction func cancelButtonPressed() {
         CoreBluetoothManager().cancelCBOperations()
-        presentController(withName: "InterfaceController", context: nil)
+        pushController(withName: "InterfaceController", context: nil)
+        //presentController(withName: "InterfaceController", context: nil)
     }
 }
