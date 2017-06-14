@@ -11,44 +11,48 @@ import Foundation
 
 class PairInterfaceController: WKInterfaceController {
     
-    var displaycount = 0
-    @IBOutlet var cancelButton: WKInterfaceButton!
+    @IBOutlet var image: WKInterfaceImage!
+    
+    @IBOutlet var group: WKInterfaceGroup!
     
     override func awake(withContext context: Any?) {
+        print(Functions().getTimeForLog(),"PairInterfaceController: awake")
          super.awake(withContext: context)
+        
+        image.setImageNamed("image")
+        //image.startAnimatingWithImages(in: NSMakeRange(0, 21), duration: 1, repeatCount: 1)
+        image.startAnimating()
     }
     
     override func willActivate() {
+        print(Functions().getTimeForLog(),"PairInterfaceController: willActivate")
         
+        WKExtension.shared().isAutorotating = true
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
     }
-    
     override func didAppear() {
-        displayInfoOnce()
+        print(Functions().getTimeForLog(),"PairInterfaceController: didAppear")
+        WKInterfaceDevice.current().play(.start)
+        //WKInterfaceDevice.current().play(.success)
+        
+        
+        
         super.didAppear()
     }
     
     override func didDeactivate() {
+        print(Functions().getTimeForLog(),"PairInterfaceController: didDeactivate")
+        WKExtension.shared().isAutorotating = false
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
     
-    func displayInfoOnce() {
-        if displaycount == 0 {
-            let dismissAction = WKAlertAction(title: "Continue", style: .default, handler: {
-                self.displaycount = 1
-            })
-            self.presentAlert(withTitle: "Pairing", message: "Hold your watch close to your iPhone or iPad with BatteryWatch open", preferredStyle: .alert, actions: [dismissAction])
-        }
-        else {
-            CoreBluetoothManager().initializeCB(runningInBackground: false)
-        }
+    override func willDisappear() {
+        print(Functions().getTimeForLog(),"PairInterfaceController: willDisappear")
+        //CoreBluetoothManager().cancelCBOperations()
+        super.willDisappear()
     }
     
-    @IBAction func cancelButtonPressed() {
-        CoreBluetoothManager().cancelCBOperations()
-        pushController(withName: "InterfaceController", context: nil)
-        //presentController(withName: "InterfaceController", context: nil)
-    }
+    
 }

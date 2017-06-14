@@ -11,20 +11,24 @@ import WatchKit
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
 
     func applicationDidFinishLaunching() {
-        readDeviceData()
+        print(Functions().getTimeForLog(),"ExtensionDelegate: applicationDidFinishLaunching")
+        readDeviceDataWatchOS()
         // Perform any final initialization of your application.
     }
 
     func applicationDidBecomeActive() {
+        print(Functions().getTimeForLog(),"ExtensionDelegate: applicationDidBecomeActive")
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
     func applicationWillResignActive() {
+        print(Functions().getTimeForLog(),"ExtensionDelegate: applicationWillResignActive")
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, etc.
     }
 
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
+        print(Functions().getTimeForLog(),"ExtensionDelegate: handleBackgroundTasks")
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {
             // Use a switch statement to check the task type
@@ -48,17 +52,18 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         }
     }
     
-    func readDeviceData() {
+    func readDeviceDataWatchOS() {
         print(WKInterfaceDevice.current().name)
         print(WKInterfaceDevice.current().model,WKInterfaceDevice.current().systemName,WKInterfaceDevice.current().systemVersion)
         WKInterfaceDevice.current().isBatteryMonitoringEnabled = true
         print(WKInterfaceDevice.current().batteryState.rawValue,WKInterfaceDevice.current().batteryLevel)
         print(WKInterfaceDevice.current().waterResistanceRating.rawValue)
         if WKInterfaceDevice.current().waterResistanceRating.rawValue == 1 {
-            print("Apple Watch Series 2")
+            print(Functions().getTimeForLog(),"Apple Watch Series 2")
         }
         else {
-            print("Apple Watch Series 1/0")
+            print(Functions().getTimeForLog(),"Apple Watch Series 1/0")
+            // Disable CoreBluetooth device pairing
         }
     }
 

@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class CoreBluetoothManager: NSObject, CBCentralManagerDelegate {
+class CoreBluetoothCentralManager: NSObject, CBCentralManagerDelegate {
     
     var manager:CBCentralManager!
     var mainCharacteristic:CBCharacteristic? = nil
@@ -60,13 +60,7 @@ class CoreBluetoothManager: NSObject, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print(peripheral.name!,"connected")
         peripheral.discoverServices(nil)
-        // Potential peripheral details
-        //peripheral.identifier
-        //peripheral.description
-        //peripheral.name
-        //peripheral.readRSSI() // Possibly wont work from central?
-        //peripheral.state
-        //peripheral.canSendWriteWithoutResponse
+        printPeripheralDetails(peripheralName: peripheral)
     }
     
     // CB STEP FOUR
@@ -108,9 +102,21 @@ class CoreBluetoothManager: NSObject, CBCentralManagerDelegate {
      //   print("willRestoreState")
     //}
     
+    func printPeripheralDetails(peripheralName: CBPeripheral){
+      /*  print(peripheral.name!,"connected")
+        Potential peripheral details
+        peripheral.identifier
+        peripheral.description
+        peripheral.name
+        //peripheral.readRSSI() // Possibly wont work from central?
+        peripheral.state
+        peripheral.canSendWriteWithoutResponse
+        */
+    }
+    
     func cancelCBOperations () {
         print("CoreBluetooth Operations Stopped")
-        if manager.isScanning == true {
+        if manager!.isScanning == true {
             manager.stopScan()
         }
     }

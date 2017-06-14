@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        readDeviceDataiOS()
         return true
     }
 
@@ -40,6 +41,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func readDeviceDataiOS() {
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        print(UIDevice.current.batteryLevel, UIDevice.current.batteryState)
+        print(UIDevice.current.name, UIDevice.current.systemName, UIDevice.current.systemVersion, UIDevice.current.model)
+    }
+    
 
 
 }
