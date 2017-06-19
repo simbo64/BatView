@@ -7,12 +7,15 @@
 //
 
 import WatchKit
+import ClockKit
 
 class ExtensionDelegate: NSObject, WKExtensionDelegate {
-
+    let defaults = UserDefaults.standard
+    
     func applicationDidFinishLaunching() {
         print(Functions().getTimeForLog(),"ExtensionDelegate: applicationDidFinishLaunching")
         readDeviceDataWatchOS()
+        WCManager().setupWCSession()
         // Perform any final initialization of your application.
     }
 
@@ -34,6 +37,16 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
             // Use a switch statement to check the task type
             switch task {
             case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: Date(timeIntervalSinceNow: 60 * 60), userInfo: nil) { (error: Error?) in
+                    if let error = error {
+                        print("Error occurred while scheduling background refresh: \(error.localizedDescription)")
+                    }
+                }
+                
+                /*let complicationServer = CLKComplicationServer.sharedInstance()
+                for complication in activeComplications {
+                    complicationServer.reloadTimelineForComplication(complication)
+                }*/
                 // Be sure to complete the background task once you’re done.
                 backgroundTask.setTaskCompletedWithSnapshot(false)
             case let snapshotTask as WKSnapshotRefreshBackgroundTask:
@@ -60,11 +73,13 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
         print(WKInterfaceDevice.current().waterResistanceRating.rawValue)
         if WKInterfaceDevice.current().waterResistanceRating.rawValue == 1 {
             print(Functions().getTimeForLog(),"Apple Watch Series 2")
+            defaults.set(true, forKey: "CBEnabled")
         }
         else {
             print(Functions().getTimeForLog(),"Apple Watch Series 1/0")
             // Disable CoreBluetooth device pairing
+            defaults.set(false, forKey: "CBEnabled")
         }
-    }
+        print("TEST AFTER SET UserDefaults:", defaults.bool(forKey: "CBEnabled"))    }
 
 }

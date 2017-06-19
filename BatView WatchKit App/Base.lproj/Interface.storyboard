@@ -46,6 +46,11 @@
                                 <action selector="pairButtonPressed" destination="AgC-eL-Hgc" id="1Rt-EO-LuL"/>
                             </connections>
                         </button>
+                        <button width="1" alignment="left" title="Sync" id="toT-l7-GxS">
+                            <connections>
+                                <action selector="tempSyncButton" destination="AgC-eL-Hgc" id="Rr7-LV-chK"/>
+                            </connections>
+                        </button>
                         <table alignment="left" id="AwD-mi-q8t">
                             <items>
                                 <tableRow id="gjR-hk-aTk">

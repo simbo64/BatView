@@ -12,7 +12,7 @@ import Foundation
 class InterfaceController: WKInterfaceController {
     
     var viewContext = 0
-    
+    let defaults = UserDefaults.standard
     @IBOutlet var watchBatteryPercentage: WKInterfaceLabel!
     @IBOutlet var watchBatteryOverlay: WKInterfaceGroup!
     @IBOutlet var watchBatteryUnderlay: WKInterfaceGroup!
@@ -61,11 +61,15 @@ class InterfaceController: WKInterfaceController {
         //present()
         displayInfoOnce()
     }
+    @IBAction func tempSyncButton() {
+        WCManager().updateDataWithiPhone()
+    }
     
     func displayInfoOnce() {
         //if displaycount == 0 {
             let dismissAction = WKAlertAction(title: "Continue", style: .default, handler: {
                 self.viewContext = 1
+                
                 //self.displaycount = 1
                 //self.present()
                 //self.presentController(withName: "PairInterfaceController", context: nil)
@@ -85,6 +89,11 @@ class InterfaceController: WKInterfaceController {
     }
     func defineUIElements() {
         self.watchBatteryUnderlay.setWidth(WKInterfaceDevice.current().screenBounds.width)
-        self.watchBatteryOverlay.setWidth(5)
+        self.watchBatteryOverlay.setWidth(1)
+        self.watchBatteryOverlay.setBackgroundColor(#colorLiteral(red: 0.2745098174, green: 0.4862745106, blue: 0.1411764771, alpha: 1))
+        if !defaults.bool(forKey: "CBEnabled"){
+            pairDeviceButton.setHidden(true)
+        }
+        
     }
 }

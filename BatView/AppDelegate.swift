@@ -5,18 +5,25 @@
 //  Created by Simon Edwardes on 05/06/2017.
 //  Copyright © 2017 Simon Edwardes. All rights reserved.
 //
-
+import WatchConnectivity
 import UIKit
+import WatchKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
+    
     var window: UIWindow?
-
-
+    var session : WCSession?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         readDeviceDataiOS()
+        
+        if WCSession.isSupported(){
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+        }
         return true
     }
 
@@ -48,7 +55,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(UIDevice.current.name, UIDevice.current.systemName, UIDevice.current.systemVersion, UIDevice.current.model)
     }
     
-
-
+    //////////////// WATCH CONNECTIVITY IMPLEMENTATION ////////////////
+    func sessionWatchStateDidChange(_ session: WCSession) {
+        print(Functions().getTimeForLog(),"sessionWatchStateDidChange",session)
+    }
+    
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        print(Functions().getTimeForLog(),"USER HAS CHANGED WATCH....activationDidCompleteWith", session)
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        // Read Message
+        readWatchMessage(dictionary: message as NSDictionary)
+        // Reply To Message
+        UIDevice.current.isBatteryMonitoringEnabled = true
+        let deviceCountPaired = 0
+        let dictionary = ["CurrentDate":Date(),"iPhoneBatteryLevel":Double(UIDevice.current.batteryLevel),"iPhoneBatteryState":Double(UIDevice.current.batteryState.rawValue),"DevicesPairedCount":deviceCountPaired] as [String : Any]
+        replyHandler(dictionary)
+    }
+    
+    func readWatchMessage(dictionary: NSDictionary){
+        let returnedKeys = dictionary.allKeys
+        let watchMessageDate = dictionary["CurrentDate"] as? NSDate
+        let watchBatteryState = dictionary["WatchBatteryState"] as? Double
+        let watchBatteryLevel = dictionary["WatchBatteryLevel"] as? Double
+        let watchPairedDevicesCount = dictionary["DevicesPairedCount"] as! Int
+        print(Functions().getTimeForLog(),"Watch Battery:",watchBatteryLevel!, "All Keys:",returnedKeys)
+    }
+    
+    func sessionReachabilityDidChange(_ session: WCSession) {
+        print("sessionReachabilityDidChange")
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession){
+        print("sessionDidBecomeInactive")
+    }
+    
+    func sessionDidDeactivate(_ session: WCSession){
+        print("sessionDidDeactivate")
+    }
+    //////////////// WATCH CONNECTIVITY IMPLEMENTATION END ////////////////
 }
 
